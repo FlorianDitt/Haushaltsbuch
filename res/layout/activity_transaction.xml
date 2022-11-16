@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/half_table"
+    tools:context=".TransactionActivity"
+    tools:ignore="ExtraText">
+
+    <ImageButton
+        android:id="@+id/backBtn1"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/back" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:gravity="center"
+        android:text="Transaktionen"
+        android:textSize="40dp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/resonTxtTran"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/incomeBolTran"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Grund"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:theme="@style/EditTextColor" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_below="@+id/amountTxtTran"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Einnahmen"
+        android:textSize="20sp" />
+
+    <Switch
+        android:id="@+id/incomeBolTran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/amountTxtTran"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:theme="@style/SCBSwitch"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/amountTxtTran"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginRight="20dp"
+        android:hint="Betrag"
+        android:inputType="numberDecimal"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:theme="@style/EditTextColor" />
+
+    <DatePicker
+        android:id="@+id/dateDatTran"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/resonTxtTran"
+        android:layout_marginRight="20dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:fadeScrollbars="false"
+        android:theme="@style/DatePickerCut" />
+
+    <Button
+        android:id="@+id/submitBtnTran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/dateDatTran"
+        android:layout_marginRight="20dp"
+        android:text="Submit" />
+
+    <Button
+        android:id="@+id/TableBtnTran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/submitBtnTran"
+        android:layout_marginRight="20dp"
+        android:text="Full Table" />
+
+    <Button
+        android:id="@+id/dAuftragBtnTran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/TableBtnTran"
+        android:layout_marginRight="20dp"
+        android:text="Daueraufträge" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dAuftragBtnTran">
+
+        <TableLayout
+            android:id="@+id/TableTblTran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/full_table">
+
+            <TableRow
+                android:background="@color/Dark_gray"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="ID"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Datum"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Betrag"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Grund"
+                    android:textColor="@color/white" />
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

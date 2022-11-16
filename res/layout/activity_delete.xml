@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/half_table"
+    tools:context=".DeleteActivity">
+
+    <ImageButton
+        android:id="@+id/backBtn3"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/back" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:gravity="center"
+        android:text="Löschen"
+        android:textSize="40dp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/IDTxtDlt"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginRight="20dp"
+        android:hint="ID"
+        android:inputType="number"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:theme="@style/EditTextColor" />
+
+    <Spinner
+        android:id="@+id/TableSpnDlt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/IDTxtDlt"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="@color/white"
+        android:popupBackground="@color/Very_dark_gray" />
+
+    <Button
+        android:id="@+id/submitBtnDlt"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/TableSpnDlt"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Submit" />
+
+
+
+</RelativeLayout>

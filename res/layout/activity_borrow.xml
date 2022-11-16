@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/half_table"
+    tools:context=".BorrowActivity">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:gravity="center"
+        android:text="Leihgaben"
+        android:textSize="40dp" />
+
+    <ImageButton
+        android:id="@+id/backBtn2"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/back" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/amountTxtBrw"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginRight="20dp"
+        android:hint="Betrag"
+        android:inputType="numberDecimal"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:theme="@style/EditTextColor" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="22dp"
+        android:layout_below="@id/amountTxtBrw"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Verliehen"
+        android:textSize="20dp"
+        />
+
+    <Switch
+        android:id="@+id/borrowesBolBrw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/amountTxtBrw"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:theme="@style/SCBSwitch"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/partnerTxtBrw"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/borrowesBolBrw"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Partner"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:theme="@style/EditTextColor" />
+
+    <DatePicker
+        android:id="@+id/RefundDatBrw"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/partnerTxtBrw"
+        android:layout_marginRight="20dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:fadeScrollbars="false"
+        android:theme="@style/DatePickerCut" />
+
+    <Button
+        android:id="@+id/submitBtnBrw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/RefundDatBrw"
+        android:layout_marginRight="20dp"
+        android:text="Submit" />
+
+    <Button
+        android:id="@+id/tableBtnBrw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/submitBtnBrw"
+        android:layout_marginRight="20dp"
+        android:text="Full Table" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tableBtnBrw">
+
+        <TableLayout
+            android:id="@+id/TableTblBrw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/full_table">
+
+            <TableRow
+                android:background="@color/Dark_gray"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="ID"
+                    android:textColor="@color/white" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Betrag"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Partner"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Fällig Bis"
+                    android:textColor="@color/white" />
+
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+</RelativeLayout>

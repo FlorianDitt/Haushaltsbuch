@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Haushaltsbuch</string>
+
+    <string-array name="RytmLength">
+        <item>Täglich</item>
+        <item>Wöchentlich</item>
+        <item>Monatlich</item>
+        <item>Jährlich</item>
+    </string-array>
+
+    <string-array name="DBTables">
+        <item>Transaktionen</item>
+        <item>Leihgaben</item>
+        <item>Dauerauftraege</item>
+    </string-array>
+
+    <string-array name="WeekDay">
+        <item>MONDAY</item>
+        <item>TUESDAY</item>
+        <item>WEDNESDAY</item>
+        <item>THURSDAY</item>
+        <item>FRIDAY</item>
+        <item>SATURDAY</item>
+        <item>SUNDAY</item>
+    </string-array>
+</resources>
