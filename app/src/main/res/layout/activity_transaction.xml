@@ -111,59 +111,69 @@
         android:text="Daueraufträge" />
 
 
+    <TableLayout
+        android:id="@+id/TableTblTranHead"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/dAuftragBtnTran"
+        android:background="@drawable/full_table"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:background="@color/Dark_gray">
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:text="ID"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:text="Datum"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:text="Betrag"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:text="Grund"
+                android:textColor="@color/white" />
+        </TableRow>
+    </TableLayout>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/dAuftragBtnTran">
-
+        android:layout_height="match_parent"
+        android:layout_below="@+id/TableTblTranHead">
         <TableLayout
             android:id="@+id/TableTblTran"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/full_table">
-
-            <TableRow
-                android:background="@color/Dark_gray"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="ID"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Datum"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Betrag"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Grund"
-                    android:textColor="@color/white" />
-            </TableRow>
-        </TableLayout>
+            android:background="@drawable/full_table"
+            android:stretchColumns="*"/>
     </ScrollView>
-
 
 </RelativeLayout>

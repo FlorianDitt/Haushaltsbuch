@@ -18,8 +18,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.hsqldb.Table;
-
 public class BorrowActivity extends AppCompatActivity {
 
     EditText amountTxtBrw, partnerTxtBrw;
