@@ -139,8 +139,6 @@ public class MainActivity extends AppCompatActivity {
             pEinnahmen[pi] = Einnahmen;
             pGrund[pi] = Grund;
 
-            System.out.println("--- [SELECTED Transaktion] ID: " + ID + " Date: " + Datum + " Amount: " + Betrag + " Income: " + Einnahmen + " Reson: " + Grund);
-
             pi++;
 
             pID = Arrays.copyOf(pID, pID.length + 1);
@@ -185,8 +183,6 @@ public class MainActivity extends AppCompatActivity {
             pPartner[piBorrow] = Partner;
             pRefundDate[piBorrow] = RefundDate;
 
-            System.out.println("--- [SELECTED Borrow] ID: " + ID + " Amount: " + Betrag + " Borrowed: " + Borrowed + " Partner: " + Partner + " RefundDate: " + RefundDate);
-
             piBorrow++;
 
             pIDBorrow = Arrays.copyOf(pIDBorrow, pIDBorrow.length + 1);
@@ -221,9 +217,6 @@ public class MainActivity extends AppCompatActivity {
             pIdBalance[piBalance] = ID;
             pBalance[piBalance] = Balance;
             pDatumBalance[piBalance] = Datum;
-
-
-            System.out.println("--- [SELECTED Bankbalance] ID: " + ID + " Amount: " + Balance + " Date: " + Datum);
 
             piBalance++;
 
@@ -266,9 +259,6 @@ public class MainActivity extends AppCompatActivity {
             pWiederholung[piBankorder] = Wiederholung;
             pDateBankorder[piBankorder] = Datum;
 
-
-            System.out.println("--- [SELECTED Bank Orders] ID: " + ID + " Amount: " + Betrag  + " Einnahmen: " + Einnahmen + " Wiederholung: " + Wiederholung + " Date: " + Datum);
-
             piBankorder++;
 
             pIDBankorder = Arrays.copyOf(pIDBankorder, pIDBankorder.length + 1);
@@ -304,7 +294,6 @@ public class MainActivity extends AppCompatActivity {
                             if (CheckWEEKDAY.equals(pDateBankorder[i])){
                                 boolean checkinsertdataDay = pDB.insertTransaktion(totalDates.get(i).toString(), pBetragBankorder[i], pEinnahenBankorder[i], "Dauerauftrag");
                                 if (checkinsertdataDay) {
-                                    System.out.println("--- [Incerted Transaktion from Dauerauftag] Date: " + totalDates.get(i).toString() + " Amount: " + pBetragBankorder[i] + " Income: " + pEinnahenBankorder[i] + " Reson: Dauerauftrag");
                                     Toast.makeText(MainActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
                                     MainActivity.SelectFromTransaktion();
                                     calculateBalence();
@@ -316,7 +305,6 @@ public class MainActivity extends AppCompatActivity {
                         case "Täglich":
                             boolean checkinsertdataDay = pDB.insertTransaktion(totalDates.get(i).toString(), pBetragBankorder[i], pEinnahenBankorder[i], "Dauerauftrag");
                             if (checkinsertdataDay) {
-                                System.out.println("--- [Incerted Transaktion from Dauerauftag] Date: " + totalDates.get(i).toString() + " Amount: " + pBetragBankorder[i] + " Income: " + pEinnahenBankorder[i] + " Reson: Dauerauftrag");
                                 Toast.makeText(MainActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
                                 MainActivity.SelectFromTransaktion();
                                 calculateBalence();
@@ -328,7 +316,6 @@ public class MainActivity extends AppCompatActivity {
                             if (Integer.parseInt(DAY) > 28 && Integer.parseInt(CheckMONTH) == 2 && Integer.parseInt(CheckDAY) == 28) {
                                 boolean checkinsertdataMonth = pDB.insertTransaktion(totalDates.get(i).toString(), pBetragBankorder[i], pEinnahenBankorder[i], "Dauerauftrag");
                                 if (checkinsertdataMonth) {
-                                    System.out.println("--- [Incerted Transaktion from Dauerauftag] Date: " + totalDates.get(i).toString() + " Amount: " + pBetragBankorder[i] + " Income: " + pEinnahenBankorder[i] + " Reson: Dauerauftrag");
                                     Toast.makeText(MainActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
                                     MainActivity.SelectFromTransaktion();
                                     calculateBalence();
@@ -338,7 +325,6 @@ public class MainActivity extends AppCompatActivity {
                             } else if (Integer.parseInt(DAY) < 31 && DAY.equals(CheckDAY)) {
                                 boolean checkinsertdataMonth = pDB.insertTransaktion(totalDates.get(i).toString(), pBetragBankorder[i], pEinnahenBankorder[i], "Dauerauftrag");
                                 if (checkinsertdataMonth) {
-                                    System.out.println("--- [Incerted Transaktion from Dauerauftag] Date: " + totalDates.get(i).toString() + " Amount: " + pBetragBankorder[i] + " Income: " + pEinnahenBankorder[i] + " Reson: Dauerauftrag");
                                     Toast.makeText(MainActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
                                     MainActivity.SelectFromTransaktion();
                                     calculateBalence();
@@ -348,7 +334,6 @@ public class MainActivity extends AppCompatActivity {
                             } else if (Integer.parseInt(DAY) == 31 && Integer.parseInt(CheckDAY) == 30) {
                                 boolean checkinsertdataMonth = pDB.insertTransaktion(totalDates.get(i).toString(), pBetragBankorder[i], pEinnahenBankorder[i], "Dauerauftrag");
                                 if (checkinsertdataMonth) {
-                                    System.out.println("--- [Incerted Transaktion from Dauerauftag] Date: " + totalDates.get(i).toString() + " Amount: " + pBetragBankorder[i] + " Income: " + pEinnahenBankorder[i] + " Reson: Dauerauftrag");
                                     Toast.makeText(MainActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
                                     MainActivity.SelectFromTransaktion();
                                     calculateBalence();
@@ -364,7 +349,6 @@ public class MainActivity extends AppCompatActivity {
                                 if (Integer.parseInt(MONTH) == 2 && Integer.parseInt(DAY) == 29 && CheckMONTH.equals(MONTH) && Integer.parseInt(CheckDAY) == 28) {
                                     boolean checkinsertdataYear = pDB.insertTransaktion(totalDates.get(i).toString(), pBetragBankorder[i], pEinnahenBankorder[i], "Dauerauftrag");
                                     if (checkinsertdataYear) {
-                                        System.out.println("--- [Incerted Transaktion from Dauerauftag] Date: " + totalDates.get(i).toString() + " Amount: " + pBetragBankorder[i] + " Income: " + pEinnahenBankorder[i] + " Reson: Dauerauftrag");
                                         Toast.makeText(MainActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
                                         MainActivity.SelectFromTransaktion();
                                         calculateBalence();
@@ -374,7 +358,6 @@ public class MainActivity extends AppCompatActivity {
                                 } else if (CheckMONTH.equals(MONTH) && CheckDAY.equals(DAY)) {
                                     boolean checkinsertdataYear = pDB.insertTransaktion(totalDates.get(i).toString(), pBetragBankorder[i], pEinnahenBankorder[i], "Dauerauftrag");
                                     if (checkinsertdataYear) {
-                                        System.out.println("--- [Incerted Transaktion from Dauerauftag] Date: " + totalDates.get(i).toString() + " Amount: " + pBetragBankorder[i] + " Income: " + pEinnahenBankorder[i] + " Reson: Dauerauftrag");
                                         Toast.makeText(MainActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
                                         MainActivity.SelectFromTransaktion();
                                         calculateBalence();
@@ -407,7 +390,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         pDB.insertBankBelance(today, newBalance);
-        System.out.println("--- [Incerted Bankbalance] Date: " + today + " Amount: " + newBalance + "€");
         MainActivity.bankBalance.setText(newBalance + "€");
     }
 }
