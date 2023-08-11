@@ -59,14 +59,9 @@ public class TransactionActivity extends AppCompatActivity {
             }
         });
 
-        lp = new TableLayout.LayoutParams(
-                TableLayout.LayoutParams.MATCH_PARENT,
-                TableLayout.LayoutParams.WRAP_CONTENT);
-        lp.setMargins(0,10,0,10);
-
         pTableTblTran = (TableLayout) findViewById(R.id.TableTblTran);
         if (pTableTblTran.getChildCount() == 0){
-            edditTable.InitializTable(MainActivity.pi, lp, pTableTblTran, this);
+            edditTable.InitializTable(MainActivity.pi, pTableTblTran, this);
         }
 
 
@@ -122,9 +117,8 @@ public class TransactionActivity extends AppCompatActivity {
                     }
                     boolean checkinsertdata = DB.insertTransaktion(year + "-" + month + "-" + day, amountDbl, incomInt, resonTxt);
                     if (checkinsertdata) {
+                        edditTable.addToTable(pTableTblTran, MainActivity.pi + 1, year + "-" + month + "-" + day, amountDbl, resonTxt, incomInt, TransactionActivity.this);
                         Toast.makeText(TransactionActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
-                        MainActivity.SelectFromTransaktion();
-                        addNewToTable();
                         calculateBalence();
                     } else {
                         Toast.makeText(TransactionActivity.this, "New Entry not Inserted", Toast.LENGTH_SHORT).show();
@@ -133,79 +127,6 @@ public class TransactionActivity extends AppCompatActivity {
             }
         });
 
-    }
-    public void addNewToTable(){
-        if (MainActivity.pi -1 > -1) {
-            TableRow TblRow = new TableRow(this);
-            TblRow.setBackgroundResource(R.drawable.border);
-            TblRow.setMinimumHeight(80);
-            TblRow.setGravity(Gravity.CENTER);
-            TblRow.setLayoutParams(lp);
-            TextView Tv1 = new TextView(this);
-            Tv1.setText(Integer.toString(MainActivity.pID[MainActivity.pi - 1]));
-            Tv1.setGravity(Gravity.CENTER);
-            Tv1.setTextColor(Color.WHITE);
-            TblRow.addView(Tv1);
-            TextView Tv2 = new TextView(this);
-            Tv2.setText(MainActivity.pDatum[MainActivity.pi - 1]);
-            Tv2.setGravity(Gravity.CENTER);
-            Tv2.setTextColor(Color.WHITE);
-            TblRow.addView(Tv2);
-            TextView Tv3 = new TextView(this);
-            Tv3.setText(Double.toString(MainActivity.pBetrag[MainActivity.pi - 1]) + "€");
-            Tv3.setGravity(Gravity.CENTER);
-            Tv3.setTextColor(Color.WHITE);
-            TblRow.addView(Tv3);
-            if (MainActivity.pEinnahmen[MainActivity.pi - 1] == 1){
-                TblRow.setBackgroundColor(Color.rgb(0, 39, 0));
-            } else {
-                TblRow.setBackgroundColor(Color.rgb(59, 0, 0));
-            }
-            TextView Tv5 = new TextView(this);
-            Tv5.setText(MainActivity.pGrund[MainActivity.pi - 1]);
-            Tv5.setGravity(Gravity.CENTER);
-            Tv5.setTextColor(Color.WHITE);
-            TblRow.addView(Tv5);
-
-            System.out.println("--- [Incerted Transaktion] ID: " + Tv1.getText() + " Date: " + Tv2.getText() + " Amount: " + Tv3.getText() + " Reson: " + Tv5.getText());
-
-            pTableTblTran.addView(TblRow);
-        }else{
-            TableRow TblRow = new TableRow(this);
-            TblRow.setBackgroundResource(R.drawable.border);
-            TblRow.setMinimumHeight(80);
-            TblRow.setGravity(Gravity.CENTER);
-            TblRow.setLayoutParams(lp);
-            TextView Tv1 = new TextView(this);
-            Tv1.setText(Integer.toString(MainActivity.pID[0]));
-            Tv1.setGravity(Gravity.CENTER);
-            Tv1.setTextColor(Color.WHITE);
-            TblRow.addView(Tv1);
-            TextView Tv2 = new TextView(this);
-            Tv2.setText(MainActivity.pDatum[0]);
-            Tv2.setGravity(Gravity.CENTER);
-            Tv2.setTextColor(Color.WHITE);
-            TblRow.addView(Tv2);
-            TextView Tv3 = new TextView(this);
-            Tv3.setText(MainActivity.pBetrag[0] + "€");
-            Tv3.setGravity(Gravity.CENTER);
-            Tv3.setTextColor(Color.WHITE);
-            TblRow.addView(Tv3);
-            if (MainActivity.pEinnahmen[0] == 1){
-                TblRow.setBackgroundColor(Color.rgb(0, 39, 0));
-            } else {
-                TblRow.setBackgroundColor(Color.rgb(59, 0, 0));
-            }
-            TextView Tv5 = new TextView(this);
-            Tv5.setText(MainActivity.pGrund[0]);
-            Tv5.setGravity(Gravity.CENTER);
-            Tv5.setTextColor(Color.WHITE);
-            TblRow.addView(Tv5);
-
-            System.out.println("--- [Incerted Transaktion] ID: " + Tv1.getText() + " Date: " + Tv2.getText() + " Amount: " +Tv3.getText() + " Reson: " + Tv5.getText());
-
-            pTableTblTran.addView(TblRow);
-        }
     }
 
     public static void calculateBalence(){
