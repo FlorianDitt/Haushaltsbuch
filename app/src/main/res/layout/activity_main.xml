@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/background"
+    android:background="@color/Theme1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -14,10 +14,12 @@
         android:layout_marginTop="80dp"
         android:gravity="center"
         android:text="0€"
+        android:textColor="@color/Theme5"
         android:textSize="80dp" />
 
     <Button
         android:id="@+id/transaktionBtn"
+        android:textColor="@color/Theme5"
         android:layout_width="match_parent"
         android:layout_height="88dp"
         android:layout_marginLeft="20dp"
@@ -27,6 +29,7 @@
 
     <Button
         android:id="@+id/borrowBtn"
+        android:textColor="@color/Theme5"
         android:layout_width="match_parent"
         android:layout_height="88dp"
         android:layout_marginLeft="20dp"
@@ -36,6 +39,7 @@
 
     <Button
         android:id="@+id/deleteBtn"
+        android:textColor="@color/Theme5"
         android:layout_width="match_parent"
         android:layout_height="88dp"
         android:layout_marginLeft="20dp"

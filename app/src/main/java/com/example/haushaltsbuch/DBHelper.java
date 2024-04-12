@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.math.BigDecimal;
+
 public class DBHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "Haushaltsbuch.db";
@@ -74,12 +76,12 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
         }
     }
-    public boolean insertBankBelance(String Datum, double Betrag){
+    public boolean insertBankBelance(String Datum, BigDecimal Betrag){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put("Datum", Datum);
-        contentValues.put("Betrag", Betrag);
+        contentValues.put("Betrag", String.valueOf(Betrag));
         long result = db.insert(TABLE3_NAME, null, contentValues);
         if(result == -1){
             return false;

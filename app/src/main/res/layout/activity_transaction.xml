@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/half_table"
+    android:background="@color/Theme1"
     tools:context=".TransactionActivity"
     tools:ignore="ExtraText">
 
@@ -18,6 +18,7 @@
 
     <TextView
         android:id="@+id/textView2"
+        android:textColor="@color/Theme5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
@@ -46,6 +47,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
         android:text="Einnahmen"
+        android:textColor="@color/Theme5"
         android:textSize="20sp" />
 
     <Switch
@@ -90,7 +92,8 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/dateDatTran"
         android:layout_marginRight="20dp"
-        android:text="Submit" />
+        android:text="Submit"
+        android:textColor="@color/Theme5" />
 
     <Button
         android:id="@+id/TableBtnTran"
@@ -99,28 +102,21 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/submitBtnTran"
         android:layout_marginRight="20dp"
-        android:text="Full Table" />
+        android:text="Full Table"
+        android:textColor="@color/Theme5" />
 
-    <Button
-        android:id="@+id/dAuftragBtnTran"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_below="@+id/TableBtnTran"
-        android:layout_marginRight="20dp"
-        android:text="Daueraufträge" />
 
 
     <TableLayout
         android:id="@+id/TableTblTranHead"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@+id/dAuftragBtnTran"
+        android:layout_below="@+id/TableBtnTran"
         android:background="@drawable/full_table"
         android:stretchColumns="*">
 
         <TableRow
-            android:background="@color/Dark_gray">
+            android:background="@color/Theme2">
 
             <TextView
                 android:gravity="center"
@@ -130,7 +126,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="10dp"
                 android:text="ID"
-                android:textColor="@color/white" />
+                android:textColor="@color/Theme5" />
 
             <TextView
                 android:gravity="center"
@@ -140,7 +136,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="10dp"
                 android:text="Datum"
-                android:textColor="@color/white" />
+                android:textColor="@color/Theme5" />
 
             <TextView
                 android:gravity="center"
@@ -150,7 +146,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="10dp"
                 android:text="Betrag"
-                android:textColor="@color/white" />
+                android:textColor="@color/Theme5" />
 
             <TextView
                 android:gravity="center"
@@ -160,7 +156,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="10dp"
                 android:text="Grund"
-                android:textColor="@color/white" />
+                android:textColor="@color/Theme5" />
         </TableRow>
     </TableLayout>
 
@@ -172,7 +168,6 @@
             android:id="@+id/TableTblTran"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/full_table"
             android:stretchColumns="*"/>
     </ScrollView>
 
