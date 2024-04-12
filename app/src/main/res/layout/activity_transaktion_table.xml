@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/full_table"
+    android:background="@color/Theme1"
     tools:context=".TransaktionTableActivity">
 
     <ImageButton
@@ -24,11 +24,10 @@
         <TableLayout
             android:id="@+id/BigTableTblTran"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/full_table">
+            android:layout_height="wrap_content">
 
             <TableRow
-                android:background="@color/Dark_gray"
+                android:background="@color/Theme2"
                 android:gravity="center">
 
                 <TextView
@@ -38,7 +37,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="10dp"
                     android:text="ID"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/Theme5" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -47,7 +46,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="10dp"
                     android:text="Datum"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/Theme5" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -56,7 +55,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="10dp"
                     android:text="Betrag"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/Theme5" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -65,7 +64,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="10dp"
                     android:text="Grund"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/Theme5" />
             </TableRow>
         </TableLayout>
     </ScrollView>

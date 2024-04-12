@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/half_table"
+    android:background="@color/Theme1"
     tools:context=".DeleteActivity">
 
     <ImageButton
@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
         android:gravity="center"
+        android:textColor="@color/Theme5"
         android:text="Löschen"
         android:textSize="40dp" />
 
@@ -55,6 +56,7 @@
         android:layout_height="48dp"
         android:layout_below="@+id/TableSpnDlt"
         android:layout_marginTop="10dp"
+        android:textColor="@color/Theme5"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:text="Submit" />

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -39,7 +40,7 @@ public class PopupBankActivity extends AppCompatActivity {
                 }else{
                     amountTxtPopup.getText().clear();
                     startActivity(new Intent(PopupBankActivity.this, MainActivity.class));
-                    double amountint = Double.parseDouble(amountTxt);
+                    BigDecimal amountint = new BigDecimal(amountTxt);
                     boolean checkinsertdata = DB.insertBankBelance(today, amountint);
                     if (checkinsertdata) {
                         Toast.makeText(PopupBankActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();

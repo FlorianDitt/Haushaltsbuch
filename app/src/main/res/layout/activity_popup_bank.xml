@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PopupBankActivity"
-    android:background="@color/Background"
+    android:background="@color/Theme1"
     android:layout_centerVertical="true"
     android:layout_centerHorizontal="true">
 
     <TextView
         android:id="@+id/StartBalanceTXT"
+        android:textColor="@color/Theme5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
@@ -37,6 +38,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_below="@id/amountTxtPopup"
-        android:text="Submit" />
+        android:text="Submit"
+        android:textColor="@color/Theme5" />
 
 </RelativeLayout>

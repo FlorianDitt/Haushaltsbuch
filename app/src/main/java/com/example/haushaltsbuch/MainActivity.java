@@ -3,6 +3,7 @@ package com.example.haushaltsbuch;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -46,17 +47,8 @@ public class MainActivity extends AppCompatActivity {
     public static double[] pBalance = new double [1];
     public static String[] pDatumBalance = new String [1];
 
-    public static int piBankorder = 0;
-    public static int[] pIDBankorder = new int [1];
-    public static double[] pBetragBankorder = new double [1];
-    public static int[] pEinnahenBankorder = new int[1];
-    public static String[] pWiederholung = new String[1];
-    public static String[] pDateBankorder = new String [1];
-
     public static String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         Button deleteBtn = findViewById(R.id.deleteBtn);
 
         pDB = new DBHelper(this);
-
         SelectFromBankBalence();
         bankBalance = findViewById(R.id.bankBalance);
         if (piBalance - 1 > -1) {
@@ -76,10 +67,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, PopupBankActivity.class));
         }
 
-        if(piBankorder == 0){
-            SelectFromBankOrders();
-            CheckForTransaktion();
-        }
 
         transaktionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,170 +213,27 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-    public static void SelectFromBankOrders() {
-        Cursor res = pDB.getdata(DBHelper.TABLE4_NAME);
-        if (res.getCount() == 0){
-            System.out.println("[Orders] No data found");
-            piBankorder = 0;
-            pIDBankorder = new int [1];
-            pBetragBankorder = new double [1];
-            pEinnahenBankorder = new int[1];
-            pWiederholung = new String[1];
-            pDateBankorder = new String [1];
-            return;
-        }
-
-        piBankorder = 0;
-        pIDBankorder = new int [1];
-        pBetragBankorder = new double [1];
-        pEinnahenBankorder = new int[1];
-        pWiederholung = new String[1];
-        pDateBankorder = new String [1];
-
-        while (res.moveToNext()) {
-            int ID = res.getInt(0);
-            double Betrag = res.getDouble(1);
-            int Einnahmen = res.getInt(2);
-            String Wiederholung = res.getString(3);
-            String Datum = res.getString(4);
-
-            pIDBankorder[piBankorder] = ID;
-            pBetragBankorder[piBankorder] = Betrag;
-            pEinnahenBankorder[piBankorder] = Einnahmen;
-            pWiederholung[piBankorder] = Wiederholung;
-            pDateBankorder[piBankorder] = Datum;
-
-            piBankorder++;
-
-            pIDBankorder = Arrays.copyOf(pIDBankorder, pIDBankorder.length + 1);
-            pBetragBankorder = Arrays.copyOf(pBetragBankorder, pBetragBankorder.length + 1);
-            pEinnahenBankorder = Arrays.copyOf(pEinnahenBankorder, pEinnahenBankorder.length + 1);
-            pWiederholung = Arrays.copyOf(pWiederholung, pWiederholung.length + 1);
-            pDateBankorder = Arrays.copyOf(pDateBankorder, pDateBankorder.length + 1);
-
-        }
-    }
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void CheckForTransaktion(){
-        if (piBalance -1 > -1 && piBankorder -1 > -1) {
-            LocalDate start = LocalDate.parse(pDatumBalance[piBalance - 1]);
-            LocalDate end = LocalDate.parse(today);
-            List<LocalDate> totalDates = new ArrayList<>();
-            while (!start.equals(end)) {
-                start = start.plusDays(1);
-                totalDates.add(start);
-            }
-            System.out.println(totalDates);
-            for (int i = 0; i < piBankorder; i++) {
-                for (int j = 0; j < totalDates.size(); j++) {
-                    String CheckDAY = totalDates.get(i).toString().substring(8, 10);
-                    String CheckMONTH = totalDates.get(i).toString().substring(5, 7);
-                    String CheckYEAR = totalDates.get(i).toString().substring(0, 4);
-                    String CheckWEEKDAY = totalDates.get(i).getDayOfWeek().toString();
-                    String DAY = pDateBankorder[i].substring(8, 10);
-                    String MONTH = pDateBankorder[i].substring(5, 7);
-                    String YEAR = pDateBankorder[i].substring(0, 4);
-                    switch (pWiederholung[i]) {
-                        case "Wöchentlich":
-                            if (CheckWEEKDAY.equals(pDateBankorder[i])){
-                                boolean checkinsertdataDay = pDB.insertTransaktion(totalDates.get(i).toString(), pBetragBankorder[i], pEinnahenBankorder[i], "Dauerauftrag");
-                                if (checkinsertdataDay) {
-                                    Toast.makeText(MainActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
-                                    MainActivity.SelectFromTransaktion();
-                                    calculateBalence();
-                                } else {
-                                    Toast.makeText(MainActivity.this, "New Entry not Inserted", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                            break;
-                        case "Täglich":
-                            boolean checkinsertdataDay = pDB.insertTransaktion(totalDates.get(i).toString(), pBetragBankorder[i], pEinnahenBankorder[i], "Dauerauftrag");
-                            if (checkinsertdataDay) {
-                                Toast.makeText(MainActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
-                                MainActivity.SelectFromTransaktion();
-                                calculateBalence();
-                            } else {
-                                Toast.makeText(MainActivity.this, "New Entry not Inserted", Toast.LENGTH_SHORT).show();
-                            }
-                            break;
-                        case "Monatlich":
-                            if (Integer.parseInt(DAY) > 28 && Integer.parseInt(CheckMONTH) == 2 && Integer.parseInt(CheckDAY) == 28) {
-                                boolean checkinsertdataMonth = pDB.insertTransaktion(totalDates.get(i).toString(), pBetragBankorder[i], pEinnahenBankorder[i], "Dauerauftrag");
-                                if (checkinsertdataMonth) {
-                                    Toast.makeText(MainActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
-                                    MainActivity.SelectFromTransaktion();
-                                    calculateBalence();
-                                } else {
-                                    Toast.makeText(MainActivity.this, "New Entry not Inserted", Toast.LENGTH_SHORT).show();
-                                }
-                            } else if (Integer.parseInt(DAY) < 31 && DAY.equals(CheckDAY)) {
-                                boolean checkinsertdataMonth = pDB.insertTransaktion(totalDates.get(i).toString(), pBetragBankorder[i], pEinnahenBankorder[i], "Dauerauftrag");
-                                if (checkinsertdataMonth) {
-                                    Toast.makeText(MainActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
-                                    MainActivity.SelectFromTransaktion();
-                                    calculateBalence();
-                                } else {
-                                    Toast.makeText(MainActivity.this, "New Entry not Inserted", Toast.LENGTH_SHORT).show();
-                                }
-                            } else if (Integer.parseInt(DAY) == 31 && Integer.parseInt(CheckDAY) == 30) {
-                                boolean checkinsertdataMonth = pDB.insertTransaktion(totalDates.get(i).toString(), pBetragBankorder[i], pEinnahenBankorder[i], "Dauerauftrag");
-                                if (checkinsertdataMonth) {
-                                    Toast.makeText(MainActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
-                                    MainActivity.SelectFromTransaktion();
-                                    calculateBalence();
-                                } else {
-                                    Toast.makeText(MainActivity.this, "New Entry not Inserted", Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                System.out.println("[ERROR] Monthly Bank order");
-                            }
-                            break;
-                        case "Jährlich":
-                            if (!YEAR.equals(CheckYEAR)) {
-                                if (Integer.parseInt(MONTH) == 2 && Integer.parseInt(DAY) == 29 && CheckMONTH.equals(MONTH) && Integer.parseInt(CheckDAY) == 28) {
-                                    boolean checkinsertdataYear = pDB.insertTransaktion(totalDates.get(i).toString(), pBetragBankorder[i], pEinnahenBankorder[i], "Dauerauftrag");
-                                    if (checkinsertdataYear) {
-                                        Toast.makeText(MainActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
-                                        MainActivity.SelectFromTransaktion();
-                                        calculateBalence();
-                                    } else {
-                                        Toast.makeText(MainActivity.this, "New Entry not Inserted", Toast.LENGTH_SHORT).show();
-                                    }
-                                } else if (CheckMONTH.equals(MONTH) && CheckDAY.equals(DAY)) {
-                                    boolean checkinsertdataYear = pDB.insertTransaktion(totalDates.get(i).toString(), pBetragBankorder[i], pEinnahenBankorder[i], "Dauerauftrag");
-                                    if (checkinsertdataYear) {
-                                        Toast.makeText(MainActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
-                                        MainActivity.SelectFromTransaktion();
-                                        calculateBalence();
-                                    } else {
-                                        Toast.makeText(MainActivity.this, "New Entry not Inserted", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                                break;
-                            }
-                    }
-                }
-            }
-        }
-    }
     public static void calculateBalence(){
         SelectFromBankBalence();
-        double newBalance;
+        BigDecimal newBalance;
+        BigDecimal currentBalance = BigDecimal.valueOf(MainActivity.pBalance[MainActivity.piBalance - 1]);
+        BigDecimal Transaction = BigDecimal.valueOf(MainActivity.pBetrag[MainActivity.pi - 1]);
         if (MainActivity.piBalance - 1 > -1) {
             if (MainActivity.pEinnahmen[MainActivity.pi - 1] == 1) {
-                newBalance = (MainActivity.pBalance[MainActivity.piBalance - 1] + MainActivity.pBetrag[MainActivity.pi - 1]);
+                newBalance = currentBalance.add(Transaction);
             } else {
-                newBalance = (MainActivity.pBalance[MainActivity.piBalance - 1] - MainActivity.pBetrag[MainActivity.pi - 1]);
+                newBalance = currentBalance.subtract(Transaction);
             }
         } else {
             if (MainActivity.pEinnahmen[MainActivity.pi - 1] == 1) {
-                newBalance = (MainActivity.pBetrag[MainActivity.pi - 1]);
+                newBalance = Transaction;
             } else {
-                newBalance = - (MainActivity.pBetrag[MainActivity.pi - 1]);
+                newBalance = new BigDecimal("0").subtract(Transaction);
             }
         }
 
         pDB.insertBankBelance(today, newBalance);
-        MainActivity.bankBalance.setText(newBalance + "€");
+        System.out.println("--- [Incerted Bankbalance] Date: " + today + " Amount: " + newBalance + "€");
+        bankBalance.setText(newBalance.toString() + "€");
     }
 }
