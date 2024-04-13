@@ -1,16 +1,8 @@
 package com.example.haushaltsbuch;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -18,16 +10,20 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TransactionActivity extends AppCompatActivity {
 
     EditText resonTxtTran, amountTxtTran;
     DatePicker dateDatTran;
     Switch incomeBolTran;
-    Button submitBtnTran, TableBtnTran;
+    Button submitBtnTran, TableBtnTran, scanBtnTran;
     ImageButton backBtn;
     static DBHelper DB;
     public static TableLayout pTableTblTran;
@@ -44,11 +40,19 @@ public class TransactionActivity extends AppCompatActivity {
         Activity a = this;
         backBtn = findViewById(R.id.backBtn1);
         dateDatTran = findViewById(R.id.dateDatTran);
+        scanBtnTran = findViewById(R.id.scanBtnTran);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        scanBtnTran.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(TransactionActivity.this,ScanBillActivity.class));
             }
         });
 
