@@ -9,6 +9,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,15 +21,17 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.vision.Frame;
+import com.google.android.gms.vision.text.TextBlock;
+import com.google.android.gms.vision.text.TextRecognizer;
+
 import java.io.IOException;
-
-
 public class ScanBillActivity extends AppCompatActivity {
 
     Button PhotoScanBtn, SelectPhotoBtn, ScanBtn;
 
     ImageView imageView;
-    TextView Text23;
+    TextView detectedText;
 
     final Activity activity = this;
 
@@ -40,7 +44,7 @@ public class ScanBillActivity extends AppCompatActivity {
         SelectPhotoBtn = findViewById(R.id.SelectPhotoBtnScan);
         ScanBtn = findViewById(R.id.ScanBtnScan);
         imageView = findViewById(R.id.ImgToScan);
-        Text23 = findViewById(R.id.Text23);
+        detectedText = findViewById(R.id.detectedText);
         PhotoScanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,6 +124,24 @@ public class ScanBillActivity extends AppCompatActivity {
         recognizeText(bitmap);
     }
     private void recognizeText(Bitmap bitmap) {
+        //TODO 1. define TextRecognizer
+        TextRecognizer recognizer = new TextRecognizer.Builder(activity).build();
+        //TODO 3. get frame from bitmap
+        Frame frame = new Frame.Builder().setBitmap(bitmap).build();
 
+        //TODO 4. get data from frame
+        SparseArray<TextBlock> sparseArray =  recognizer.detect(frame);
+
+        //TODO 5. set data on textview
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(int i=0;i < sparseArray.size(); i++){
+            TextBlock tx = sparseArray.get(i);
+            String str = tx.getValue();
+
+            stringBuilder.append(str);
+        }
+
+        Log.i(TAG, String.valueOf(stringBuilder));
     }
 }

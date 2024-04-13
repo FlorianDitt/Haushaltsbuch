@@ -12,10 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:layout_above="@+id/Text23"/>
+        android:layout_above="@+id/detectedText"/>
 
     <TextView
-        android:id="@+id/Text23"
+        android:id="@+id/detectedText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/ScanBtnScan"/>
