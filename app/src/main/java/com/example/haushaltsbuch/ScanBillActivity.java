@@ -166,5 +166,11 @@ public class ScanBillActivity extends AppCompatActivity {
         for(int i=0;i < Strings.size(); i++){
             Log.i(TAG + "Strings", String.valueOf(Strings.get(i)));
         }
+        Intent intent = new Intent(this, ScannedTextActivity.class);
+
+        intent.putExtra("Numbers", Numbers);
+        intent.putExtra("Strings", Strings);
+
+        startActivity(intent);
     }
 }

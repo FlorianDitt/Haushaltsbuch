@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Theme1"
+    tools:context=".ScannedTextActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:layout_above="@+id/ReorderBrn">
+
+        <TableLayout
+            android:id="@+id/TableTblScanned"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0,1,3">
+        </TableLayout>
+    </ScrollView>
+    <Button
+        android:id="@+id/ReorderBrn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Fertig"  />
+</RelativeLayout>
