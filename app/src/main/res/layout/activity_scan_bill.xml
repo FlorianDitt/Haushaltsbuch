@@ -14,6 +14,21 @@
         android:layout_centerInParent="true"
         android:layout_above="@+id/detectedText"/>
 
+    <ImageView
+        android:id="@+id/ImgToCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        android:layout_above="@+id/detectedText"/>
+
+    <com.canhub.cropper.CropImageView
+        android:id="@+id/ImgCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_above="@+id/detectedText"/>
+
     <TextView
         android:id="@+id/detectedText"
         android:layout_width="match_parent"
@@ -37,17 +52,17 @@
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_above="@id/PhotoBtnScan"
+        android:layout_above="@id/CutBtnScan"
         android:text="Bild Auswählen"  />
 
     <Button
-        android:id="@+id/PhotoBtnScan"
+        android:id="@+id/CutBtnScan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="Bild machen"  />
+        android:text="Bild Zuschneiden"  />
 
 </RelativeLayout>

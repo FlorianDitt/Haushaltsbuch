@@ -21,36 +21,34 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.canhub.cropper.CropImageView;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 public class ScanBillActivity extends AppCompatActivity {
 
-    Button PhotoScanBtn, SelectPhotoBtn, ScanBtn;
-
-    ImageView imageView;
+    Button CutBtnScan, SelectPhotoBtn, ScanBtn;
+    CropImageView ImgCrop;
+    ImageView imageView, ImgToCrop;
     TextView detectedText;
-
     final Activity activity = this;
-
+    boolean i = true;
     private static final String TAG = "TextRecognition";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_bill);
-        PhotoScanBtn = findViewById(R.id.PhotoBtnScan);
         SelectPhotoBtn = findViewById(R.id.SelectPhotoBtnScan);
+        CutBtnScan = findViewById(R.id.CutBtnScan);
         ScanBtn = findViewById(R.id.ScanBtnScan);
         imageView = findViewById(R.id.ImgToScan);
         detectedText = findViewById(R.id.detectedText);
-        PhotoScanBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TakePicture();
-            }
-        });
+        ImgCrop = findViewById(R.id.ImgCrop);
+        ImgToCrop = findViewById(R.id.ImgToCrop);
         ScanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,20 +61,14 @@ public class ScanBillActivity extends AppCompatActivity {
                 imageChooser();
             }
         });
-    }
-    private void TakePicture(){
-        try {
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        CutBtnScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageCropper();
             }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        });
     }
-
     static final int REQUEST_IMAGE_CAPTURE = 1;
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -87,9 +79,6 @@ public class ScanBillActivity extends AppCompatActivity {
         }
     }
     private void imageChooser() {
-
-        // create an instance of the
-        // intent of the type image
         Intent i = new Intent();
         i.setType("image/*");
         i.setAction(Intent.ACTION_GET_CONTENT);
@@ -113,10 +102,24 @@ public class ScanBillActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 imageView.setImageBitmap(selectedImageBitmap);
+                ImgToCrop.setImageBitmap(selectedImageBitmap);
             }
         }
     });
+    private void imageCropper(){
+        Bitmap bitmap1 = ((BitmapDrawable)ImgToCrop.getDrawable()).getBitmap();
+        if(i){
+            i = false;
+            ImgCrop.setImageBitmap(bitmap1);
+        }else{
+            i = true;
+            Bitmap bitmap2= ImgCrop.getCroppedImage();
+            ImgCrop.setImageBitmap(null);
+            imageView.setImageBitmap(bitmap2);
+        }
 
+
+    }
     private void ImageToBitmap(){
         // Convert ImageView to Bitmap
         Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
@@ -124,24 +127,44 @@ public class ScanBillActivity extends AppCompatActivity {
         recognizeText(bitmap);
     }
     private void recognizeText(Bitmap bitmap) {
-        //TODO 1. define TextRecognizer
         TextRecognizer recognizer = new TextRecognizer.Builder(activity).build();
-        //TODO 3. get frame from bitmap
         Frame frame = new Frame.Builder().setBitmap(bitmap).build();
-
-        //TODO 4. get data from frame
         SparseArray<TextBlock> sparseArray =  recognizer.detect(frame);
-
-        //TODO 5. set data on textview
-        StringBuilder stringBuilder = new StringBuilder();
+        String[] All = new ArrayList<String>().toArray(new String[0]);
+        ArrayList<String> Numbers = new ArrayList<String>();
+        ArrayList<String> Strings = new ArrayList<String>();
 
         for(int i=0;i < sparseArray.size(); i++){
             TextBlock tx = sparseArray.get(i);
             String str = tx.getValue();
-
-            stringBuilder.append(str);
+            Log.i(TAG, str);
+            All = str.split("\\r?\\n");
         }
-
-        Log.i(TAG, String.valueOf(stringBuilder));
+        for (String string : All) {
+            String s = null;
+            if (!string.matches("(?i).*pfand.*|.*kg.*|.*x.*|.*%.*")) {
+                s = string.replaceAll("[^0-9,.€]", "");
+            }
+            if ( s != null && !s.equals("")&& !s.equals(".") && !s.equals(",")){
+                Numbers.add(s);
+            }
+        }
+        for (String string : All) {
+            String s;
+            if (!string.matches("(?i).*pfand.*|.*kg.*|.*x.*|.*%.*")) {
+                s = string.replaceAll("\\d", "");
+            }else{
+                s = string;
+            }
+            if (s.replaceAll(" ", "").length() > 3) {
+                Strings.add(s);
+            }
+        }
+        for(int i=0;i < Numbers.size(); i++){
+            Log.i(TAG + "Numbers", String.valueOf(Numbers.get(i)));
+        }
+        for(int i=0;i < Strings.size(); i++){
+            Log.i(TAG + "Strings", String.valueOf(Strings.get(i)));
+        }
     }
 }
