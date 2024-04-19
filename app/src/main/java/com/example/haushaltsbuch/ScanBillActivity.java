@@ -121,7 +121,12 @@ public class ScanBillActivity extends AppCompatActivity {
 
     }
     private void ImageToBitmap(){
-        // Convert ImageView to Bitmap
+        if(!i){
+            i = true;
+            Bitmap bitmap2= ImgCrop.getCroppedImage();
+            ImgCrop.setImageBitmap(null);
+            imageView.setImageBitmap(bitmap2);
+        }
         Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
 
         recognizeText(bitmap);
