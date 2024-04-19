@@ -91,7 +91,7 @@ public class TransactionActivity extends AppCompatActivity {
                 }
                 int year = dateDatTran.getYear();
                 if (resonTxt.equals("") || amountTxt.equals("")) {
-                    Toast.makeText(TransactionActivity.this, "No Data to Insert", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TransactionActivity.this, "Bitte gib einen Betrag und einen Grund an", Toast.LENGTH_SHORT).show();
                 } else {
                     double amountDbl = Double.parseDouble(amountTxt);
                     if (incomeBolTran.isChecked()){
@@ -101,7 +101,6 @@ public class TransactionActivity extends AppCompatActivity {
                     }
                     boolean checkinsertdata = DB.insertTransaktion(year + "-" + month + "-" + day, amountDbl, incomInt, resonTxt);
                     if (checkinsertdata) {
-                        Toast.makeText(TransactionActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
                         MainActivity.SelectFromTransaktion();
                         edditTable.addToTable(MainActivity.pi, lp, pTableTblTran, a);
                         MainActivity.calculateBalence();
