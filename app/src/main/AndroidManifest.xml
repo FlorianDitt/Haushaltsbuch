@@ -4,6 +4,9 @@
     package="com.example.haushaltsbuch">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+
 
     <application
         android:allowBackup="true"
@@ -15,6 +18,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Haushaltsbuch"
         tools:targetApi="31">
+        <activity
+            android:name=".AuthenticationActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ScannedTextActivity"
             android:exported="false" />
@@ -41,13 +53,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"/>
     </application>
 
 </manifest>

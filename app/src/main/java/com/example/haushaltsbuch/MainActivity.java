@@ -1,26 +1,18 @@
 package com.example.haushaltsbuch;
 
-import androidx.annotation.RequiresApi;
+import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.database.Cursor;
-import android.os.Build;
-import android.os.Bundle;
-import android.text.format.DateUtils;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
+import java.util.Arrays;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     public static int[] pIdBalance = new int [1];
     public static double[] pBalance = new double [1];
     public static String[] pDatumBalance = new String [1];
-
     public static String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
     @Override
@@ -66,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         }else{
             startActivity(new Intent(MainActivity.this, PopupBankActivity.class));
         }
+
 
 
         transaktionBtn.setOnClickListener(new View.OnClickListener() {
