@@ -16,13 +16,13 @@
         android:theme="@style/Theme.Haushaltsbuch"
         tools:targetApi="31">
         <activity
-            android:name=".BankOrderTableActivity"
+            android:name=".ScannedTextActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ScanBillActivity"
             android:exported="false" />
         <activity
             android:name=".PopupBankActivity"
-            android:exported="false" />
-        <activity
-            android:name=".BankersOrderActivity"
             android:exported="false" />
         <activity
             android:name=".BorrowTableActivity"
