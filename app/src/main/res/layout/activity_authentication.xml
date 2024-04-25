@@ -7,4 +7,11 @@
     android:background="@color/Theme1"
     tools:context=".AuthenticationActivity">
 
+    <Button
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verrivizieren"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
 </RelativeLayout>

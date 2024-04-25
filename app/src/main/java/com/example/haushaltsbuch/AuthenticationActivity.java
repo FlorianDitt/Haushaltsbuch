@@ -1,47 +1,87 @@
 package com.example.haushaltsbuch;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.hardware.fingerprint.FingerprintManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
+
+import java.util.concurrent.Executor;
+
 
 public class AuthenticationActivity extends AppCompatActivity {
+    private BiometricPrompt biometricPrompt;
+    private BiometricPrompt.PromptInfo promptInfo;
+    Button test;
+    Activity a = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
-        FingerprintManager fingerprintManager = (FingerprintManager) getSystemService(Context.FINGERPRINT_SERVICE);
-        if (!fingerprintManager.isHardwareDetected()) {
-            Toast.makeText(AuthenticationActivity.this, "Keinen Fingerabdruck verfügbar", Toast.LENGTH_SHORT).show();
-        } else if (!fingerprintManager.hasEnrolledFingerprints()) {
-            Toast.makeText(AuthenticationActivity.this, "Das Gerät besitzt keinen Fingerabdruck", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(AuthenticationActivity.this, "Fingerabdruck funktioniert 1", Toast.LENGTH_SHORT).show();
-            CheckFingerprint(this);
-        }
-    }
-    public void CheckFingerprint(Activity a){
-        FingerprintManager fingerprintManager = (FingerprintManager) getSystemService(Context.FINGERPRINT_SERVICE);
-        FingerprintManager.AuthenticationCallback authenticationCallback = new FingerprintManager.AuthenticationCallback() {
-            @Override
-            public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
-                // Fingerabdruck erfolgreich erkannt
-                // Öffne die gewünschte Activity oder führe die gewünschte Aktion aus
-                Toast.makeText(a, "Fingerabdruck funktioniert 2", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(AuthenticationActivity.this, MainActivity.class));
-            }
-            @Override
-            public void onAuthenticationFailed() {
-                // Fingerabdruck nicht erkannt
-                Toast.makeText(a, "Fingerabdruck nicht erkannt", Toast.LENGTH_SHORT).show();
-            }
-        };
-        // Starte die Authentifizierung
-        fingerprintManager.authenticate(null, null, 0, authenticationCallback, null);
 
+        test = findViewById(R.id.test);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttonAuthenticate(view);
+            }
+        });
+
+        Executor executor = ContextCompat.getMainExecutor(this);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            biometricPrompt = new BiometricPrompt(this, executor, new BiometricPrompt.AuthenticationCallback() {
+                @Override
+                public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                    super.onAuthenticationError(errorCode, errString);
+                    System.out.println("Error");
+                }
+
+                @Override
+                public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                    super.onAuthenticationSucceeded(result);
+
+                    System.out.println("Success");
+                    startActivity(new Intent(AuthenticationActivity.this,MainActivity.class));
+                }
+
+                @Override
+                public void onAuthenticationFailed() {
+                    super.onAuthenticationFailed();
+
+                    System.out.println("Failure");
+                }
+            });
+        }
+
+        promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Programmer World Authentication")
+                .setNegativeButtonText("Cancel")
+                .setConfirmationRequired(false)
+                .build();
+        BiometricManager biometricManager = BiometricManager.from(this);
+        if (biometricManager.canAuthenticate() != BiometricManager.BIOMETRIC_SUCCESS) {
+
+            System.out.println("Biometric Not Supported");
+            return;
+        }
+        biometricPrompt.authenticate(promptInfo);
+    }
+
+    public void buttonAuthenticate(View view) {
+        BiometricManager biometricManager = BiometricManager.from(this);
+        if (biometricManager.canAuthenticate() != BiometricManager.BIOMETRIC_SUCCESS) {
+
+            System.out.println("Biometric Not Supported");
+            return;
+        }
+        biometricPrompt.authenticate(promptInfo);
     }
 }
