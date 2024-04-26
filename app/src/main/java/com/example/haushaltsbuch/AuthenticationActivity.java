@@ -5,7 +5,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,19 +16,18 @@ import androidx.core.content.ContextCompat;
 
 import java.util.concurrent.Executor;
 
-
 public class AuthenticationActivity extends AppCompatActivity {
     private BiometricPrompt biometricPrompt;
     private BiometricPrompt.PromptInfo promptInfo;
-    Button test;
+    ImageView VerificationButton;
     Activity a = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
 
-        test = findViewById(R.id.test);
-        test.setOnClickListener(new View.OnClickListener() {
+        VerificationButton = findViewById(R.id.VerificationButton);
+        VerificationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 buttonAuthenticate(view);
@@ -41,7 +41,9 @@ public class AuthenticationActivity extends AppCompatActivity {
                 @Override
                 public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
                     super.onAuthenticationError(errorCode, errString);
+
                     System.out.println("Error");
+                    Toast.makeText(AuthenticationActivity.this, "Error", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -49,6 +51,7 @@ public class AuthenticationActivity extends AppCompatActivity {
                     super.onAuthenticationSucceeded(result);
 
                     System.out.println("Success");
+                    Toast.makeText(AuthenticationActivity.this, "Success", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(AuthenticationActivity.this,MainActivity.class));
                 }
 
@@ -57,6 +60,7 @@ public class AuthenticationActivity extends AppCompatActivity {
                     super.onAuthenticationFailed();
 
                     System.out.println("Failure");
+                    Toast.makeText(AuthenticationActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -79,7 +83,10 @@ public class AuthenticationActivity extends AppCompatActivity {
         BiometricManager biometricManager = BiometricManager.from(this);
         if (biometricManager.canAuthenticate() != BiometricManager.BIOMETRIC_SUCCESS) {
 
+            //TODO: Not for the Build
+            //startActivity(new Intent(AuthenticationActivity.this,MainActivity.class));
             System.out.println("Biometric Not Supported");
+            Toast.makeText(AuthenticationActivity.this, "Biometric Not Supported", Toast.LENGTH_SHORT).show();
             return;
         }
         biometricPrompt.authenticate(promptInfo);
