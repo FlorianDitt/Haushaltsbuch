@@ -55,4 +55,7 @@
         <item name="android:textAppearance">?android:attr/textAppearanceSmallInverse</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>>
     </style>
+    <style name="CustomFingerprintTheme" parent="@android:style/Theme">
+        <item name="android:fingerprintAuthDrawable">@drawable/fingerprintauthdrawable</item>
+    </style>
 </resources>

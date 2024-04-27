@@ -1,18 +1,15 @@
 package com.example.haushaltsbuch;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class TransaktionTableActivity extends AppCompatActivity {
 
@@ -32,7 +29,7 @@ public class TransaktionTableActivity extends AppCompatActivity {
         lp.setMargins(0,10,0,10);
         backBtn4 = findViewById(R.id.backBtn4);
 
-        addToTable();
+        edditTable.InitializTable(MainActivity.pi,lp,pBigTableTblTran,this);
 
         backBtn4.setOnClickListener(new View.OnClickListener() {
             @Override

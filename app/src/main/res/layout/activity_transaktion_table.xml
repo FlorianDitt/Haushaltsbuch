@@ -15,57 +15,68 @@
         android:layout_marginLeft="10dp"
         android:background="@drawable/back" />
 
+    <TableLayout
+        android:layout_below="@id/backBtn4"
+        android:id="@+id/Tbl"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/full_table"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:background="@color/Theme2">
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:text="ID"
+                android:textColor="@color/Theme5" />
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:text="Datum"
+                android:textColor="@color/Theme5" />
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:text="Betrag"
+                android:textColor="@color/Theme5" />
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:text="Grund"
+                android:textColor="@color/Theme5" />
+        </TableRow>
+    </TableLayout>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/backBtn4"
-        android:layout_marginTop="5dp">
-
+        android:layout_height="match_parent"
+        android:layout_below="@+id/Tbl">
         <TableLayout
             android:id="@+id/BigTableTblTran"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TableRow
-                android:background="@color/Theme2"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="ID"
-                    android:textColor="@color/Theme5" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Datum"
-                    android:textColor="@color/Theme5" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Betrag"
-                    android:textColor="@color/Theme5" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Grund"
-                    android:textColor="@color/Theme5" />
-            </TableRow>
-        </TableLayout>
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"/>
     </ScrollView>
 </RelativeLayout>

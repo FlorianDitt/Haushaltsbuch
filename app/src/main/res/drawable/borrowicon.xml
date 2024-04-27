@@ -1,0 +1,13 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Hintergrundrechteck mit gewünschter Farbe -->
+    <item>
+        <shape
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:shape="rectangle">
+            <solid android:color="@color/transparent" />
+        </shape>
+    </item>
+    <!-- Fingerabdruck-Drawable -->
+    <item android:drawable="@drawable/leihen"/>
+</layer-list>
