@@ -37,6 +37,7 @@ public class TransactionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
         Initialize();
+        MainActivity.SelectFromTransaktion();
 
         intent = getIntent();
         if (!Objects.equals(intent.getStringExtra("Store"), "")){

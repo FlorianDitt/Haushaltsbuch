@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     public static int[] pIdBalance = new int [1];
     public static double[] pBalance = new double [1];
     public static String[] pDatumBalance = new String [1];
+    public static DecimalFormat formatter = new DecimalFormat("###,###,###,###,###.00€");
     public static String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
     @Override
@@ -46,16 +48,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView transactionBtn = findViewById(R.id.transaktionBtn);
-        ImageView transactionTblBtn = findViewById(R.id.transaktionTblBtn);
+        RelativeLayout transactionBtn = findViewById(R.id.transaktionBtn);
         RelativeLayout borrowBtn = findViewById(R.id.borrowBtn);
-        RelativeLayout deleteBtn = findViewById(R.id.deleteBtn);
+        ImageView transactionTblBtn = findViewById(R.id.transaktionTblBtn);
+        ImageView deleteBtn = findViewById(R.id.deleteBtn);
+        ImageView ScanBtnMain = findViewById(R.id.ScanBtnMain);
 
         pDB = new DBHelper(this);
         SelectFromBankBalence();
         bankBalance = findViewById(R.id.bankBalance);
         if (piBalance - 1 > -1) {
-            bankBalance.setText(pBalance[piBalance - 1] + "€");
+            bankBalance.setText(formatter.format(pBalance[piBalance - 1]));
         }else{
             startActivity(new Intent(MainActivity.this, PopupBankActivity.class));
         }
@@ -66,16 +69,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, TransactionActivity.class));
-                SelectFromTransaktion();
             }
 
         });
-
+        ScanBtnMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ScanBillActivity.class));
+            }
+        });
         transactionTblBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, TransaktionTableActivity.class));
-                SelectFromTransaktion();
             }
         });
         borrowBtn.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
                 SelectFromBorrow();
             }
         });
-
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -235,6 +240,6 @@ public class MainActivity extends AppCompatActivity {
 
         pDB.insertBankBelance(today, newBalance);
         System.out.println("--- [Incerted Bankbalance] Date: " + today + " Amount: " + newBalance + "€");
-        bankBalance.setText(newBalance.toString() + "€");
+        bankBalance.setText(formatter.format(newBalance.toString()));
     }
 }

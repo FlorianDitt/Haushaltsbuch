@@ -84,7 +84,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         if (biometricManager.canAuthenticate() != BiometricManager.BIOMETRIC_SUCCESS) {
 
             //TODO: Not for the Build
-            //startActivity(new Intent(AuthenticationActivity.this,MainActivity.class));
+            startActivity(new Intent(AuthenticationActivity.this,MainActivity.class));
             System.out.println("Biometric Not Supported");
             Toast.makeText(AuthenticationActivity.this, "Biometric Not Supported", Toast.LENGTH_SHORT).show();
             return;
