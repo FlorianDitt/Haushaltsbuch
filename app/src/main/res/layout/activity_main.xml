@@ -21,6 +21,8 @@
             android:layout_height="180dp"
             android:gravity="center"
             android:text="0€"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
             android:textColor="@color/Theme5"
             android:maxLines="1"
             android:layout_centerVertical="true"

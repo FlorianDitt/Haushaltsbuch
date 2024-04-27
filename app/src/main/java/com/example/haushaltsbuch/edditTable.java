@@ -6,9 +6,25 @@ import android.view.Gravity;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class edditTable {
+    public static final String OLD_FORMAT = "yyyy-MM-dd";
+    public static final String NEW_FORMAT = "dd.MM.yyyy";
+
     public static void InitializTable(int TblLength, TableLayout.LayoutParams lp, TableLayout TL, Activity Activity){
         for (int i = TblLength-1; i > -1; i--) {
+            SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
+            Date d = null;
+            try {
+                d = sdf.parse(MainActivity.pDatum[i]);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            sdf.applyPattern(NEW_FORMAT);
             TableRow TblRow = new TableRow(Activity);
             TblRow.setBackgroundResource(R.drawable.border);
             TblRow.setMinimumHeight(80);
@@ -23,7 +39,7 @@ public class edditTable {
             TblRow.addView(Tv1);
             TextView Tv2 = new TextView(Activity);
             Tv2.setMaxWidth(200);
-            Tv2.setText(MainActivity.pDatum[i]);
+            Tv2.setText(sdf.format(d));
             Tv2.setGravity(Gravity.CENTER);
             Tv2.setTextColor(Color.WHITE);
             TblRow.addView(Tv2);
